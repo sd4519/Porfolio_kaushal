@@ -422,3 +422,5 @@ Kinetic menu closing: links exit in reverse stagger, followed by the layered pan
 Responsive hero image: use the user-supplied portrait hero-portfolio-mobile.png below 1024px (mobile and tablet); retain hero-portfolio.png for desktop. Use picture/source selection and centered contain sizing so the entire illustration remains visible.
 
 Post-hero scene: a warm cardboard parcel with blue Kaushal branding drops once when the section enters view, lands near the section bottom, settles with a subtle bounce and releases short-lived ground dust. Use physical Three.js materials, fiber grain, tape seam, soft lighting and shadows. Lazy-load the scene; pause when hidden and stop rendering once settled. Reduced motion renders a resting box; unsupported WebGL uses a static parcel.
+
+Parcel color update: the box uses brand blue #003FFD across its faces, with white printing and a translucent blue tape seam. Preserve cardboard grain, physical lighting, shadows and impact dust.

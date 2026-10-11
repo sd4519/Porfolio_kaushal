@@ -43,7 +43,7 @@ export default function BoxDrop() {
       const texture = (kind) => {
         const canvas = document.createElement('canvas'); canvas.width = canvas.height = 1024;
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#b59368'; ctx.fillRect(0, 0, 1024, 1024);
+        ctx.fillStyle = '#003ffd'; ctx.fillRect(0, 0, 1024, 1024);
         const pixels = ctx.getImageData(0, 0, 1024, 1024);
         for (let i = 0; i < pixels.data.length; i += 4) {
           const grain = (Math.random() - .5) * 20;
@@ -51,21 +51,21 @@ export default function BoxDrop() {
         }
         ctx.putImageData(pixels, 0, 0);
         for (let i = 0; i < 10000; i++) {
-          ctx.strokeStyle = Math.random() > .5 ? 'rgba(65,42,20,.09)' : 'rgba(255,245,220,.12)';
+          ctx.strokeStyle = Math.random() > .5 ? 'rgba(0,16,80,.12)' : 'rgba(210,226,255,.12)';
           const x = Math.random() * 1024, y = Math.random() * 1024;
           ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x + Math.random()*8, y+Math.random()*3); ctx.stroke();
         }
-        ctx.strokeStyle = 'rgba(66,42,21,.25)'; ctx.lineWidth = 3; ctx.strokeRect(10,10,1004,1004);
+        ctx.strokeStyle = 'rgba(0,18,86,.25)'; ctx.lineWidth = 3; ctx.strokeRect(10,10,1004,1004);
         if (kind === 'front') {
-          ctx.fillStyle = '#003ffd'; ctx.font = '600 90px Arial'; ctx.fillText('Kaushal.', 110, 420);
-          ctx.fillStyle = '#403626'; ctx.font = '24px Arial'; ctx.fillText('PRECISE THINKING / PURPOSEFUL EXECUTION', 110, 470);
+          ctx.fillStyle = '#ffffff'; ctx.font = '600 90px Arial'; ctx.fillText('Kaushal.', 110, 420);
+          ctx.fillStyle = '#ffffff'; ctx.font = '24px Arial'; ctx.fillText('PRECISE THINKING / PURPOSEFUL EXECUTION', 110, 470);
           ctx.font = '22px Arial'; ctx.fillText('PORTFOLIO — HANDLE WITH CARE', 110, 820);
           for(let x = 700; x < 915; x += 5) { ctx.fillRect(x, 725, Math.random() > .5 ? 2 : 4, 90); }
         }
         if (kind === 'top') {
-          ctx.fillStyle = '#3e3020'; ctx.fillRect(0,509,1024,6);
-          ctx.fillStyle = 'rgba(215,176,116,.8)'; ctx.fillRect(0,463,1024,98);
-          ctx.strokeStyle = 'rgba(255,244,214,.25)'; ctx.lineWidth=2;
+          ctx.fillStyle = '#001c79'; ctx.fillRect(0,509,1024,6);
+          ctx.fillStyle = 'rgba(105,145,255,.55)'; ctx.fillRect(0,463,1024,98);
+          ctx.strokeStyle = 'rgba(221,234,255,.25)'; ctx.lineWidth=2;
           for(let i=0;i<30;i++) { const y=466+Math.random()*92; ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(1024,y);ctx.stroke(); }
         }
         const map = new T.CanvasTexture(canvas); map.colorSpace=T.SRGBColorSpace; map.anisotropy=4; textures.push(map); return map;
@@ -119,3 +119,4 @@ export default function BoxDrop() {
   },[]);
   return <section className="box-drop-section" aria-label="A cardboard parcel falls and settles with a soft cloud of dust"><div ref={host} className="box-drop-stage"><div className="box-drop-fallback" aria-hidden="true">Kaushal.</div></div></section>;
 }
+
