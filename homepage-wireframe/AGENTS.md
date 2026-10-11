@@ -74,3 +74,5 @@ Use all caps for the unpack prompt. Skills use expandable React Bits Branched Me
 Skills and software emerge separately. Skills use a cursor click, heading typing, branch drawing and staggered labels; tools wait for the skills-revealed event.
 
 Unpacking must follow scroll position, with no timed autoplay. Pausing scroll pauses box, cursor, typing, lines, skills and tools; reverse scrolling rewinds.
+
+Skills click/typing sequence now autoplays once triggered by scrolling to the skills stage. Tool emergence remains scroll-controlled and gated on skills completion.

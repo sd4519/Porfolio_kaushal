@@ -9,6 +9,7 @@ export default function SkillsReveal({ items }) {
     const section = element.closest('.box-drop-section');
     const media = matchMedia('(prefers-reduced-motion: reduce)');
     let timeline;
+    let triggered = false;
     let context;
     const play = () => {
       const cursor = element.querySelector('.skills-reveal-cursor');
@@ -16,7 +17,7 @@ export default function SkillsReveal({ items }) {
       const rows = element.querySelectorAll('.branched-menu__head, .branched-menu__item');
       const lines = element.querySelectorAll('.branched-menu__base');
       element.dataset.played = 'true';
-      const complete = () => { element.inert = false; };
+      const complete = () => { element.inert = false; section.dataset.skillsComplete = 'true'; };
       if (media.matches) { heading.textContent = '01 / SKILLS'; complete(); return; }
       context = gsap.context(() => {
         element.inert = true;
@@ -32,7 +33,7 @@ export default function SkillsReveal({ items }) {
         heading.textContent = '';
         const typing = { count: 0 };
         const phrase = '01 / SKILLS';
-        timeline = gsap.timeline({ paused: true });
+        timeline = gsap.timeline({ paused: true, onComplete: complete });
         timeline.to(cursor, { opacity: 1, scale: 1, y: startY - 65, duration: .35, ease: 'power2.out' })
           .to(cursor, { x: 44, y: 5, duration: .85, ease: 'power3.inOut' })
           .to(cursor, { scale: .8, duration: .1 })
@@ -47,14 +48,13 @@ export default function SkillsReveal({ items }) {
     };
     play();
     const progress = event => {
-      const value = media.matches ? 1 : Math.max(0, Math.min(1, (event.detail - .3) / .5));
-      timeline?.progress(value);
-      element.inert = value < 1;
-      const count=Math.floor(Math.max(0,Math.min(1,(timeline?.time() - 1.48)/.7))*11);
-      element.querySelector('.skills-typed-heading').textContent=media.matches?'01 / SKILLS':'01 / SKILLS'.slice(0,count);
+      if (!triggered && event.detail >= .3) {
+        triggered = true;
+        timeline?.play(0);
+      }
     };
     section.addEventListener('unpack-progress', progress);
-    const motion = () => { context?.revert();play(); };
+    const motion = () => { context?.revert();triggered = false;play(); };
     media.addEventListener('change', motion);
     return () => { section.removeEventListener('unpack-progress', progress);media.removeEventListener('change',motion);context?.revert(); };
 

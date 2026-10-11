@@ -170,7 +170,7 @@ export default function BoxDrop() {
         const progress=motion.matches?1:T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
         elapsed=progress*14;
         opening=motion.matches?1:T.MathUtils.smoothstep(progress,.13,.3);
-        toolsReveal.value=motion.matches?1:T.MathUtils.smoothstep(progress,.82,1);
+        toolsReveal.value=motion.matches?1:section.current.dataset.skillsComplete==='true'?T.MathUtils.smoothstep(progress,.82,1):0;
         section.current.dispatchEvent(new CustomEvent('unpack-progress',{detail:progress}));
         const fall=Math.min(elapsed/1.05,1);
         box.position.y=.875*box.scale.y+7.5*(1-fall*fall);

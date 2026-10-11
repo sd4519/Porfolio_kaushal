@@ -436,3 +436,5 @@ Prompt now uses all caps. Skills use React Bits Branched Menu with two expandabl
 Unpacking choreography: reveal skills first. A decorative brand-blue cursor emerges from the box, moves to the skills label and clicks; 01 / SKILLS types in, branch lines draw, then category and skill labels appear in sequence. After completion, software objects emerge independently. Keep controls inert during their reveal; reduced motion shows the completed state.
 
 All unpacking motion is now directly scrubbed by scroll position: drop/dust, flaps, cursor/click, typing, branches, staggered skills and tools. Pausing scroll pauses the scene; reverse scroll rewinds it. Reduced motion remains static.
+
+Latest choreography: reaching the skills stage via scroll triggers automatic cursor movement/click, typing, branch drawing and label reveal once. Software tools remain driven by subsequent scrolling and wait for the skills sequence to complete.
