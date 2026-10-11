@@ -50,3 +50,8 @@
 .portfolio-skill-branches::before { transform: scaleY(var(--skills-trunk, 1)); transform-origin: top; }
 .unpack-tools { opacity: var(--tools-reveal, 0); }
 .box-drop-section:has([data-fallback]) { --tools-reveal: 1; }
+.unpack-tools { opacity: 1; }
+.unpack-tools .portfolio-skill-branches { --bm-muted: #606b72; }
+.unpack-tools .tool-object-anchor { width: 24px; height: 24px; }
+.unpack-tools .branched-menu__item { gap: 10px; }
+@media (max-width: 767px) { .unpack-tools .branched-menu__item { gap: 4px; } .unpack-tools .tool-object-anchor { width: 20px; height: 20px; } }

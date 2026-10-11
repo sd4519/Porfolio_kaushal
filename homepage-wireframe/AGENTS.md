@@ -76,3 +76,5 @@ Skills and software emerge separately. Skills use a cursor click, heading typing
 Unpacking must follow scroll position, with no timed autoplay. Pausing scroll pauses box, cursor, typing, lines, skills and tools; reverse scrolling rewinds.
 
 Skills click/typing sequence now autoplays once triggered by scrolling to the skills stage. Tool emergence remains scroll-controlled and gated on skills completion.
+
+After skills complete, tools autoplay with matching cursor/type/branch choreography. Preserve the 3D tiles beside tool names.

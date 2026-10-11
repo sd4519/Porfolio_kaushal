@@ -3,6 +3,12 @@ import './BoxDrop.css';
 import { portfolioSkills, portfolioTools } from './portfolioContent.js';
 import FoldText from './FoldText.jsx';
 import SkillsReveal from './SkillsReveal.jsx';
+import gsap from 'gsap';
+
+const toolBranches = [
+  { label: 'Creative software', children: portfolioTools.slice(0,3).map(tool => ({ value: tool.name, label: tool.name, icon: <span className="tool-object-anchor" /> })) },
+  { label: 'Web tools', children: portfolioTools.slice(3).map(tool => ({ value: tool.name, label: tool.name, icon: <span className="tool-object-anchor" /> })) },
+];
 
 const skillBranches = [
   { label: 'Brand & communication', children: [0,1,4,5].map(index => ({ value: portfolioSkills[index], label: portfolioSkills[index] })) },
@@ -152,6 +158,9 @@ export default function BoxDrop() {
       const motion=matchMedia('(prefers-reduced-motion: reduce)');
       let elapsed=0;
       const render=()=>renderer.render(scene,camera);
+      let toolAnimationStarted=false;
+      const onToolsEmerge=()=>{if(toolAnimationStarted)return;toolAnimationStarted=true;gsap.to(toolsReveal,{value:1,duration:motion.matches?0:1.5,ease:'power2.inOut',onUpdate:()=>{updateContents();render();}});};
+      section.current.addEventListener('tools-emerge',onToolsEmerge);
       const size=()=>{
         const origin=element.getBoundingClientRect();const {width,height}=origin;
         renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();camera.updateMatrixWorld();
@@ -170,8 +179,9 @@ export default function BoxDrop() {
         const progress=motion.matches?1:T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
         elapsed=progress*14;
         opening=motion.matches?1:T.MathUtils.smoothstep(progress,.13,.3);
-        toolsReveal.value=motion.matches?1:section.current.dataset.skillsComplete==='true'?T.MathUtils.smoothstep(progress,.82,1):0;
+        if(motion.matches)toolsReveal.value=1;
         section.current.dispatchEvent(new CustomEvent('unpack-progress',{detail:progress}));
+        if(section.current.dataset.toolsEmerging==='true')onToolsEmerge();
         const fall=Math.min(elapsed/1.05,1);
         box.position.y=.875*box.scale.y+7.5*(1-fall*fall);
         box.rotation.set(.09*(1-fall),-.28+.1*(1-fall),-.12*(1-fall));
@@ -194,7 +204,7 @@ export default function BoxDrop() {
       window.addEventListener('scroll',onScroll,{passive:true});
       motion.addEventListener('change',onScroll);
       size();draw();
-      cleanup=()=>{window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onScroll);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
+      cleanup=()=>{section.current?.removeEventListener('tools-emerge',onToolsEmerge);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onScroll);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
     },{threshold:.25});
     observer.observe(element);
     return ()=>{disposed=true;observer.disconnect();cleanup();};
@@ -204,7 +214,7 @@ export default function BoxDrop() {
       <div ref={host} className="box-drop-stage" aria-hidden="true"><div className="box-drop-fallback">Kaushal.</div></div>
       <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scrub" splitBy="word" fontSize={13} fontWeight={400} color="#003ffd" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
       <div className="unpack-column unpack-skills"><SkillsReveal items={skillBranches} /></div>
-      <div className="unpack-column unpack-tools"><p className="eyebrow">02 / Software &amp; tools</p><ul>{portfolioTools.map(tool=><li key={tool.name}><span className="tool-object-anchor" aria-hidden="true" /><span>{tool.name}</span></li>)}</ul></div>
+      <div className="unpack-column unpack-tools"><SkillsReveal items={toolBranches} headingText="02 / TOOLS" stage="tools" /></div>
     </div>
   </section>;
 }
