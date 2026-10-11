@@ -8,17 +8,15 @@ export default function SkillsReveal({ items }) {
     const element = root.current;
     const section = element.closest('.box-drop-section');
     const media = matchMedia('(prefers-reduced-motion: reduce)');
-    let played = false;
+    let timeline;
     let context;
     const play = () => {
-      if (played) return;
-      played = true;
       const cursor = element.querySelector('.skills-reveal-cursor');
       const heading = element.querySelector('.skills-typed-heading');
       const rows = element.querySelectorAll('.branched-menu__head, .branched-menu__item');
       const lines = element.querySelectorAll('.branched-menu__base');
       element.dataset.played = 'true';
-      const complete = () => { element.inert = false; section.dispatchEvent(new Event('skills-revealed')); };
+      const complete = () => { element.inert = false; };
       if (media.matches) { heading.textContent = '01 / SKILLS'; complete(); return; }
       context = gsap.context(() => {
         element.inert = true;
@@ -34,7 +32,7 @@ export default function SkillsReveal({ items }) {
         heading.textContent = '';
         const typing = { count: 0 };
         const phrase = '01 / SKILLS';
-        const timeline = gsap.timeline({ onComplete: complete });
+        timeline = gsap.timeline({ paused: true });
         timeline.to(cursor, { opacity: 1, scale: 1, y: startY - 65, duration: .35, ease: 'power2.out' })
           .to(cursor, { x: 44, y: 5, duration: .85, ease: 'power3.inOut' })
           .to(cursor, { scale: .8, duration: .1 })
@@ -47,11 +45,19 @@ export default function SkillsReveal({ items }) {
           .set('.branched-menu__marker, .branched-menu__reach', { clearProps: 'opacity' });
       }, element);
     };
-    section.addEventListener('skills-unpack', play);
-    const motion = () => { if (media.matches) { context?.revert(); played=false; play(); } };
+    play();
+    const progress = event => {
+      const value = media.matches ? 1 : Math.max(0, Math.min(1, (event.detail - .3) / .5));
+      timeline?.progress(value);
+      element.inert = value < 1;
+      const count=Math.floor(Math.max(0,Math.min(1,(timeline?.time() - 1.48)/.7))*11);
+      element.querySelector('.skills-typed-heading').textContent=media.matches?'01 / SKILLS':'01 / SKILLS'.slice(0,count);
+    };
+    section.addEventListener('unpack-progress', progress);
+    const motion = () => { context?.revert();play(); };
     media.addEventListener('change', motion);
-    if (media.matches) play();
-    return () => { section.removeEventListener('skills-unpack', play); media.removeEventListener('change', motion); context?.revert(); };
+    return () => { section.removeEventListener('unpack-progress', progress);media.removeEventListener('change',motion);context?.revert(); };
+
   }, []);
   return <div ref={root} className="skills-reveal">
     <p className="eyebrow skills-typed-heading">01 / SKILLS</p>

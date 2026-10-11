@@ -72,3 +72,5 @@ Remove What I bring heading. Inside the box is muted gray; unpacking prompt is b
 Use all caps for the unpack prompt. Skills use expandable React Bits Branched Menu categories with brand-blue branch traces. Preserve the right-side 3D tools.
 
 Skills and software emerge separately. Skills use a cursor click, heading typing, branch drawing and staggered labels; tools wait for the skills-revealed event.
+
+Unpacking must follow scroll position, with no timed autoplay. Pausing scroll pauses box, cursor, typing, lines, skills and tools; reverse scrolling rewinds.

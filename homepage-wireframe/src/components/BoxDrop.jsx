@@ -3,7 +3,6 @@ import './BoxDrop.css';
 import { portfolioSkills, portfolioTools } from './portfolioContent.js';
 import FoldText from './FoldText.jsx';
 import SkillsReveal from './SkillsReveal.jsx';
-import gsap from 'gsap';
 
 const skillBranches = [
   { label: 'Brand & communication', children: [0,1,4,5].map(index => ({ value: portfolioSkills[index], label: portfolioSkills[index] })) },
@@ -126,16 +125,11 @@ export default function BoxDrop() {
         return {mesh,target:new T.Vector3()};
       });
       let opening=0;
-      let skillsTriggered=false;
       const toolsReveal={value:0};
       const updateContents=()=>{
         flaps.forEach(({hinge,side,axis})=>hinge.rotation[axis]=(axis==='x'?-side:side)*opening*2.35);
         section.current.style.setProperty('--unpack',String(T.MathUtils.smoothstep(opening,.2,.95)));
         section.current.style.setProperty('--tools-reveal',String(toolsReveal.value));
-        if(opening>.2 && !skillsTriggered) {
-          skillsTriggered=true;
-          section.current.dispatchEvent(new Event('skills-unpack'));
-        }
         toolObjects.forEach(({mesh,target},i)=>{
           const r=T.MathUtils.smoothstep(toolsReveal.value,i*.025,.75+i*.025);
           mesh.visible=r>0;
@@ -156,11 +150,8 @@ export default function BoxDrop() {
         return {sprite, angle:i/32*Math.PI*2, speed:.8+Math.random()*1.4, size:.65+Math.random()*.7};
       });
       const motion=matchMedia('(prefers-reduced-motion: reduce)');
-      let frame=0, elapsed=0, last=0, visible=true;
+      let elapsed=0;
       const render=()=>renderer.render(scene,camera);
-      const onSkillsRevealed=()=>{ gsap.to(toolsReveal,{value:1,duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:1.4,ease:'power2.inOut',onUpdate:()=>{updateContents();render();}}); };
-      section.current.addEventListener('skills-revealed',onSkillsRevealed);
-      if(motion.matches)toolsReveal.value=1;
       const size=()=>{
         const origin=element.getBoundingClientRect();const {width,height}=origin;
         renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();camera.updateMatrixWorld();
@@ -171,41 +162,39 @@ export default function BoxDrop() {
           const ray=point.sub(camera.position).normalize();
           toolObjects[i].target.copy(camera.position).addScaledVector(ray,-camera.position.z/ray.z);
           toolObjects[i].mesh.userData.baseScale=b.width/height*12;
-        });updateContents();render();
+        });onScroll();
       };
-      const resize=new ResizeObserver(size); resize.observe(element);
-      const settle=()=>{box.position.y=.875*box.scale.y;box.rotation.set(0,-.28,0);dust.forEach(d=>d.sprite.material.opacity=0); updateContents();render();};
-      const tick=time=>{
-        frame=0; if(disposed || !visible || document.hidden) {last=0;return;}
-        if(motion.matches){settle();return;}
-        if(last)elapsed+=Math.min((time-last)/1000,.05);last=time;
+      let scrollFrame=0;
+      const draw=()=>{
+        const rect=section.current.getBoundingClientRect();
+        const progress=motion.matches?1:T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
+        elapsed=progress*14;
+        opening=motion.matches?1:T.MathUtils.smoothstep(progress,.13,.3);
+        toolsReveal.value=motion.matches?1:T.MathUtils.smoothstep(progress,.82,1);
+        section.current.dispatchEvent(new CustomEvent('unpack-progress',{detail:progress}));
         const fall=Math.min(elapsed/1.05,1);
         box.position.y=.875*box.scale.y+7.5*(1-fall*fall);
         box.rotation.set(.09*(1-fall),-.28+.1*(1-fall),-.12*(1-fall));
         const impact=elapsed-1.05;
-        if(impact>=0){
+        if(impact>=0 && !motion.matches){
           box.position.y=.875*box.scale.y+.2*Math.abs(Math.sin(impact*11))*Math.exp(-impact*5);
           box.rotation.z=.045*Math.sin(impact*13)*Math.exp(-impact*5);
-          dust.forEach(d=>{const travel=1.15+d.speed*(1-Math.exp(-impact*1.5));d.sprite.position.set(Math.cos(d.angle)*travel,.07+Math.sin(Math.min(impact/2,1)*Math.PI)*.35,Math.sin(d.angle)*travel*.75);d.sprite.scale.setScalar(d.size*(.3+impact*.8));d.sprite.material.opacity=Math.min(impact*7,1)*Math.exp(-impact*1.5);});
         }
-        if(elapsed>1.35)updateContents();render(); if(elapsed<4.5)frame=requestAnimationFrame(tick);else settle();
+        dust.forEach(d=>{
+          const t=Math.max(0,impact);
+          const travel=1.15+d.speed*(1-Math.exp(-t*1.5));
+          d.sprite.position.set(Math.cos(d.angle)*travel,.07+Math.sin(Math.min(t/2,1)*Math.PI)*.35,Math.sin(d.angle)*travel*.75);
+          d.sprite.scale.setScalar(d.size*(.3+t*.8));
+          d.sprite.material.opacity=impact<0||motion.matches?0:Math.min(t*7,1)*Math.exp(-t*1.5);
+        });
+        updateContents();render();
       };
-      const wake=()=>{if(!frame && elapsed<4.5 && visible && !document.hidden)frame=requestAnimationFrame(tick);};
-      const visibility=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)wake();else {cancelAnimationFrame(frame);frame=0;last=0;}});visibility.observe(element);
-      let scrollFrame=0;
-      const onScroll=()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{
-        scrollFrame=0;
-        const rect=section.current.getBoundingClientRect();
-        const progress=T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
-        opening=motion.matches?1:T.MathUtils.smoothstep(progress,.06,.82);
-        if(elapsed>=1.35||motion.matches){updateContents();render();}
-      });};
+      const onScroll=()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;draw();});};
+      const resize=new ResizeObserver(size);resize.observe(element);
       window.addEventListener('scroll',onScroll,{passive:true});
-      const onMotion=()=>{if(motion.matches){cancelAnimationFrame(frame);frame=0;elapsed=4.5;opening=1;settle();}else {onScroll();wake();}};
-      const onVisibility=()=>{last=0;if(document.hidden){cancelAnimationFrame(frame);frame=0;}else wake();};
-      motion.addEventListener('change',onMotion);document.addEventListener('visibilitychange',onVisibility);
-      size();onScroll();if(motion.matches){elapsed=4.5;opening=1;settle();}else wake();
-      cleanup=()=>{section.current?.removeEventListener('skills-revealed',onSkillsRevealed);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);cancelAnimationFrame(frame);resize.disconnect();visibility.disconnect();motion.removeEventListener('change',onMotion);document.removeEventListener('visibilitychange',onVisibility);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
+      motion.addEventListener('change',onScroll);
+      size();draw();
+      cleanup=()=>{window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onScroll);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
     },{threshold:.25});
     observer.observe(element);
     return ()=>{disposed=true;observer.disconnect();cleanup();};
@@ -213,7 +202,7 @@ export default function BoxDrop() {
   return <section ref={section} className="box-drop-section" aria-label="Unpack my skills and tools">
     <div className="box-drop-sticky">
       <div ref={host} className="box-drop-stage" aria-hidden="true"><div className="box-drop-fallback">Kaushal.</div></div>
-      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scroll" splitBy="word" fontSize={13} fontWeight={400} color="#003ffd" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
+      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scrub" splitBy="word" fontSize={13} fontWeight={400} color="#003ffd" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
       <div className="unpack-column unpack-skills"><SkillsReveal items={skillBranches} /></div>
       <div className="unpack-column unpack-tools"><p className="eyebrow">02 / Software &amp; tools</p><ul>{portfolioTools.map(tool=><li key={tool.name}><span className="tool-object-anchor" aria-hidden="true" /><span>{tool.name}</span></li>)}</ul></div>
     </div>

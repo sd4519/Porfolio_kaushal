@@ -151,8 +151,14 @@ const FoldText = ({
 
     let scrollTrigger;
     let hoverHandler;
+    let progressHandler;
+    const section = root.closest('.box-drop-section');
 
-    if (trigger === 'hover') {
+    if (trigger === 'scrub' && !reduceMotion) {
+      play(false).pause(0);
+      progressHandler = event => timelineRef.current?.progress(Math.min(1, event.detail / 0.08));
+      section?.addEventListener('unpack-progress', progressHandler);
+    } else if (trigger === 'hover') {
       gsap.set(pieces, { opacity: 1, rotateX: 0, rotateY: 0, '--fold-crease': 0, transformOrigin: hingeConfig.origin });
       hoverHandler = () => play(false);
       root.addEventListener('mouseenter', hoverHandler);
@@ -172,6 +178,7 @@ const FoldText = ({
 
     return () => {
       if (hoverHandler) root.removeEventListener('mouseenter', hoverHandler);
+      if (progressHandler) section?.removeEventListener('unpack-progress', progressHandler);
       scrollTrigger?.kill();
       killTimeline();
     };
