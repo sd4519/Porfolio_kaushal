@@ -19,7 +19,7 @@ export default function SkillsReveal({ items }) {
       const lines = element.querySelectorAll('.branched-menu__base');
       element.dataset.played = 'true';
       const complete = () => { element.inert = false; section.dispatchEvent(new Event('skills-revealed')); };
-      if (media.matches) { complete(); return; }
+      if (media.matches) { heading.textContent = '01 / SKILLS'; complete(); return; }
       context = gsap.context(() => {
         element.inert = true;
         const bounds = element.getBoundingClientRect();
