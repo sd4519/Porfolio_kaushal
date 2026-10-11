@@ -444,3 +444,15 @@ Tools now automatically follow skills completion. Use the same cursor click, typ
 Refinements: tool icons are smaller and face the camera straight. Branch labels share the muted color, including initial selections. Desktop columns sit symmetrically around the box; narrow layouts retain equal side gutters. Increase ground-dust density and duration. Inside the box uses brand blue, with a secondary-gray prompt and blue shine on MY SKILLS and TOOLS.
 
 Tools branch layout is mirrored: right-side trunks, labels facing inward. Scrolling upward rewinds both reveals, retracts the 3D tool tiles and moves the skills/tool labels back toward the box before the flaps close. Forward scrolling still triggers sequential automatic reveals.
+
+First-visit intro: brand-blue fullscreen typography types/deletes Brand identity., Packaging design., and Digital experiences. before revealing the homepage. Use resume-grounded Brand & digital designer and Gandhinagar, India details. Run once per browser session, support Skip/Escape, bypass for reduced motion, clean up timers and restore scrolling. No simulated percentage indicator.
+
+Preloader override: replace the type/delete introduction with React Bits Thought Line. Use a neutral fullscreen surface, blue wordmark/dot, shimmering loading label and a progress trace tied to actual hero-image decoding and font readiness. Show Ready to explore before fading out. Keep portfolio discipline text, once-per-session behavior, skip/Escape, timeout fallback and reduced motion.
+
+Current loading behavior: preloader removed from the rendered app for now. Homepage opens immediately.
+
+Section exit: once tools are fully revealed, forward scroll near the end triggers packing, flap closure, parcel loading onto a brand-blue 3D flatbed truck and a left-to-right departure. After departure, scroll automatically to Selected Work. Allow Skip, Escape and upward wheel cancellation; reduced motion retains normal scrolling without truck choreography. Local implementation only.
+
+Delivery truck is now a responsive 2D SVG in brand blue at the bottom of the section, with rotating wheels and a muted architectural skyline/road backdrop. Preserve the 3D parcel, packing/loading choreography and automatic advance. Keep all changes local.
+
+Truck delivery removed at user request. Restore the original box drop/unpacking section with skills and tools, reverse-scroll packing, and normal scrolling to the next section. No truck, road backdrop, scroll lock or automatic section advance. Keep local only.

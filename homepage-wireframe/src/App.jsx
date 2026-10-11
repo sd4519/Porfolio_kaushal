@@ -15,6 +15,7 @@ const navigationItems = [
 export function App() {
   return (
     <>
+      <div id="portfolio-content">
       <a className="skip-link" href="#main">Skip to content</a>
       <ScrollProgress />
       <header className="site-header" id="top">
@@ -59,6 +60,7 @@ export function App() {
         </section>
       </main>
       <footer className="site-footer"><div className="container footer-content"><a className="wordmark" href="#top">Kaushal.</a><div className="footer-meta"><span>Typography study / Draft content</span><a href="#top">Back to top</a></div></div></footer>
+      </div>
     </>
   );
 }

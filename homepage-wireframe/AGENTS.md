@@ -82,3 +82,17 @@ After skills complete, tools autoplay with matching cursor/type/branch choreogra
 Use straight smaller software icons, neutral initial branch labels, symmetric columns, clearer ground dust, blue Inside the box title and secondary-gray prompt with selective blue shine.
 
 Mirror tools branches to face the center, with lines at right. On reverse scrolling, pack skills and tools back into the box and close flaps.
+
+User workflow restriction: keep all work local. Do not git push or deploy to Vercel unless the user explicitly requests it.
+
+Local first-session introduction uses type/delete resume phrases in PortfolioIntro. Skip/Escape dismisses, reduced motion bypasses, and sessionStorage prevents replay on refresh within a session. Keep local; no push/deploy without request.
+
+Latest preloader is Thought Line, replacing the typing intro. Wait for real hero-image and font readiness; neutral background, blue indicator, status shimmer and trace. Keep local only.
+
+Preloader disabled at user request. Render the homepage immediately; keep changes local.
+
+Inside the box exit packs contents, closes parcel, loads a 3D truck, drives left to right and advances to Selected Work. Trigger near section end only after tools completion. Respect reduced motion and cancellation; do not push or deploy.
+
+Delivery truck is now a responsive 2D SVG in brand blue at the bottom of the section, with rotating wheels and a muted architectural skyline/road backdrop. Preserve the 3D parcel, packing/loading choreography and automatic advance. Keep all changes local.
+
+Truck delivery removed at user request. Restore the original box drop/unpacking section with skills and tools, reverse-scroll packing, and normal scrolling to the next section. No truck, road backdrop, scroll lock or automatic section advance. Keep local only.

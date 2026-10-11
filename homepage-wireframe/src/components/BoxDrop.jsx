@@ -212,9 +212,10 @@ export default function BoxDrop() {
       const onScroll=()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;draw();});};
       const resize=new ResizeObserver(size);resize.observe(element);
       window.addEventListener('scroll',onScroll,{passive:true});
-      motion.addEventListener('change',onScroll);
+      const onMotionChange=onScroll;
+      motion.addEventListener('change',onMotionChange);
       size();draw();
-      cleanup=()=>{section.current?.removeEventListener('tools-emerge',onToolsEmerge);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onScroll);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
+      cleanup=()=>{section.current?.removeEventListener('tools-emerge',onToolsEmerge);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onMotionChange);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
     },{threshold:.25});
     observer.observe(element);
     return ()=>{disposed=true;observer.disconnect();cleanup();};

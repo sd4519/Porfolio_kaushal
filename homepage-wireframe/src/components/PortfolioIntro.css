@@ -1,0 +1,11 @@
+.portfolio-intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #f2f1ed; color: #171b1d; padding: var(--page-gutter); transition: opacity 350ms ease; }
+.portfolio-intro.is-leaving { opacity: 0; pointer-events: none; }
+.intro-wordmark { position: absolute; top: 32px; left: var(--page-gutter); font: 600 22px/1.4 "Space Grotesk", sans-serif; letter-spacing: -.035em; color: var(--accent); }
+.intro-copy { width: min(100%, 430px); }
+.intro-label { font: 500 11px/1.5 "IBM Plex Sans", sans-serif; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 24px; }
+.intro-signature { margin-top: 28px; font-size: 12px; color: var(--muted); }
+.intro-location { position: absolute; left: var(--page-gutter); bottom: 32px; font-size: 11px; color: var(--muted); }
+.intro-skip { position: absolute; bottom: 20px; right: var(--page-gutter); display: flex; align-items: center; gap: 16px; padding: 12px 0 12px 16px; min-height: 44px; background: none; color: var(--accent); border: 0; font: 500 12px/1.5 "IBM Plex Sans", sans-serif; cursor: pointer; }
+.intro-skip:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+@media (max-width: 767px) { .intro-wordmark { top: 24px; } .intro-location { font-size: 9px; } .intro-copy .thought-line { --tl-font: 17px !important; } .intro-signature { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .portfolio-intro { transition: none; } .portfolio-intro .thought-line__pulse { animation: none; } }
