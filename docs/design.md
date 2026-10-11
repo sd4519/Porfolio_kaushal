@@ -426,3 +426,5 @@ Post-hero scene: a warm cardboard parcel with blue Kaushal branding drops once w
 Parcel color update: the box uses brand blue #003FFD across its faces, with white printing and a translucent blue tape seam. Preserve cardboard grain, physical lighting, shadows and impact dust.
 
 Resume-based unpacking: after the parcel lands, further scroll opens four hinged flaps. Core services from Kausha_Resume.pdf emerge on the left: Brand Identity, Packaging Design, Website Design, Social Media Design, Marketing Design, Print Media, UI/UX Design, AI Development. On the right, actual Three.js objects with thickness, beveled edges and lighting represent the resume's software icons: Photoshop, Illustrator, Premiere Pro, Wix, WordPress, HTML5, CSS3. Preserve tool identity colors within a brand-blue and neutral composition. The section holds in view while unpacking; reduced motion displays its completed state.
+
+Unpacking heading is centered at the top of the scene. The prompt uses React Bits Fold Text on first scroll entry, with brand-blue Shiny Text highlights limited to my skills and tools. Keep restrained sizing and static text for reduced motion.

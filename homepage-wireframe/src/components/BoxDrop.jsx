@@ -1,6 +1,15 @@
 import { useEffect, useRef } from 'react';
 import './BoxDrop.css';
 import { portfolioSkills, portfolioTools } from './portfolioContent.js';
+import FoldText from './FoldText.jsx';
+
+const unpackPrompt = [
+  { text: 'Scroll to unpack ' },
+  { text: 'my skills', shine: true },
+  { text: ' & ' },
+  { text: 'tools', shine: true },
+  { text: '.' },
+];
 
 export default function BoxDrop() {
   const host = useRef(null);
@@ -187,7 +196,7 @@ export default function BoxDrop() {
   return <section ref={section} className="box-drop-section" aria-label="Unpack my skills and tools">
     <div className="box-drop-sticky">
       <div ref={host} className="box-drop-stage" aria-hidden="true"><div className="box-drop-fallback">Kaushal.</div></div>
-      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><h2>What I bring.</h2><p>Scroll to unpack my skills &amp; tools.</p></div>
+      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><h2>What I bring.</h2><p><FoldText text="Scroll to unpack my skills & tools." parts={unpackPrompt} trigger="scroll" splitBy="word" fontSize={13} fontWeight={400} color="#606b72" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
       <div className="unpack-column unpack-skills"><p className="eyebrow">01 / Skills</p><ul>{portfolioSkills.map(skill=><li key={skill}>{skill}</li>)}</ul></div>
       <div className="unpack-column unpack-tools"><p className="eyebrow">02 / Software &amp; tools</p><ul>{portfolioTools.map(tool=><li key={tool.name}><span className="tool-object-anchor" aria-hidden="true" /><span>{tool.name}</span></li>)}</ul></div>
     </div>

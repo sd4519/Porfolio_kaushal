@@ -64,3 +64,5 @@ User-approved 3D exception: a realistic cardboard box drop and impact dust direc
 The 3D parcel is brand blue #003FFD with white branding, including its WebGL fallback. Preserve the drop and dust animation.
 
 Resume verified visually: tool icons are Photoshop, Illustrator, Premiere Pro, Wix, WordPress, HTML5 and CSS3. Use portfolioContent.js as the editable source for the eight core services and tools. Box opens with scroll; skills left, actual 3D software tiles right. Do not invent additional proficiencies.
+
+Center the unpacking heading and prompt. Use Fold Text reveal on the prompt and blue shine only on my skills and tools.
