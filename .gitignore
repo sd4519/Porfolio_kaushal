@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.vite/
+.local-assets/
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+# Local preview captures and reference downloads
+/qa-*.png
+/kinetic-mobile.png
+/*-registry.json
+/reference-analysis/
+qa-*.png

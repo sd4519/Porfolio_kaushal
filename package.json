@@ -1,0 +1,11 @@
+{
+  "name": "kaushal-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix homepage-wireframe ci",
+    "dev": "npm --prefix homepage-wireframe run dev --",
+    "build": "npm --prefix homepage-wireframe run build",
+    "preview": "npm --prefix homepage-wireframe run preview --"
+  }
+}

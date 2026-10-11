@@ -1,0 +1,29 @@
+.kinetic-navigation { display: none; }
+@media (max-width: 1023px) {
+  body .site-header { z-index: 20; overflow: visible; }
+  .portfolio-gooey-nav { display: none; }
+  .kinetic-navigation { display: block; }
+  .kinetic-toggle { position: relative; z-index: 3; display: flex; align-items: center; gap: 20px; min-height: 44px; border: 0; border-radius: 999px; background: var(--accent); color: white; padding: 10px 18px; font: 500 13px/1.5 "IBM Plex Sans", Arial, sans-serif; cursor: pointer; }
+  .kinetic-toggle:hover { background: var(--accent-hover); }
+  .kinetic-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .kinetic-plus { font-size: 24px; line-height: 1; transition: transform .35s; }
+  .kinetic-plus.is-open { transform: rotate(45deg); }
+  .kinetic-overlay { position: fixed; inset: 0; display: none; overflow: hidden; z-index: 2; }
+  .kinetic-scrim { position: absolute; inset: 0; background: rgb(23 27 29 / .25); }
+  .kinetic-backdrop { position: absolute; inset: 0 0 0 auto; width: min(640px, 100%); }
+  .kinetic-backdrop-first { background: var(--accent); }
+  .kinetic-backdrop-second { background: #dbe4ff; }
+  .kinetic-backdrop-final { background: #f2f1ed; }
+  .kinetic-content { position: absolute; inset: 0 0 0 auto; width: min(640px, 100%); padding: 110px 40px 40px; overflow-y: auto; display: flex; flex-direction: column; }
+  .kinetic-caption { font: 500 11px/1.5 "IBM Plex Sans", Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 28px; }
+  .kinetic-content ul { list-style: none; margin: 0; padding: 0; }
+  .kinetic-content li { overflow: hidden; border-bottom: 1px solid var(--line); }
+  .kinetic-link { display: flex; align-items: baseline; gap: 16px; font: 500 clamp(28px, 6vw, 52px)/1.4 "Space Grotesk", Arial, sans-serif; padding: 8px 2px; letter-spacing: -.035em; }
+  .kinetic-link:hover, .kinetic-link[aria-current] { color: var(--accent); }
+  .kinetic-link:focus-visible { outline-offset: -2px; }
+  .kinetic-index { font: 400 11px/1 "IBM Plex Sans", Arial, sans-serif; letter-spacing: 0; color: var(--muted); }
+  .kinetic-marker { margin-left: auto; font-size: 24px; }
+  .kinetic-signoff { margin-top: auto; margin-bottom: 0; padding-top: 40px; text-transform: none; letter-spacing: 0; }
+}
+@media (max-width: 480px) { .kinetic-content { padding: 100px 24px 28px; } }
+@media (prefers-reduced-motion: reduce) { .kinetic-plus { transition: none; } }
