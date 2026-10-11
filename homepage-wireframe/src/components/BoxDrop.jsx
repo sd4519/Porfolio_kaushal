@@ -82,7 +82,7 @@ export default function BoxDrop() {
         if (kind === 'front') {
           ctx.fillStyle = '#ffffff'; ctx.font = '600 90px Arial'; ctx.fillText('Kaushal.', 110, 420);
           ctx.fillStyle = '#ffffff'; ctx.font = '24px Arial'; ctx.fillText('PRECISE THINKING / PURPOSEFUL EXECUTION', 110, 470);
-          ctx.font = '22px Arial'; ctx.fillText('PORTFOLIO — HANDLE WITH CARE', 110, 820);
+          ctx.font = '22px Arial'; ctx.fillText('PORTFOLIO â€” HANDLE WITH CARE', 110, 820);
           for(let x = 700; x < 915; x += 5) { ctx.fillRect(x, 725, Math.random() > .5 ? 2 : 4, 90); }
         }
         if (kind === 'top') {
@@ -142,18 +142,18 @@ export default function BoxDrop() {
           mesh.position.copy(new T.Vector3(0,1.5,0).lerp(target,r));
           mesh.position.y+=Math.sin(r*Math.PI)*.7;
           mesh.scale.setScalar((mesh.userData.baseScale||1)*(.35+.65*r));
-          mesh.rotation.set((1-r)*.7,.18+(1-r)*1.4,(1-r)*-.5);
+          mesh.quaternion.copy(camera.quaternion); mesh.rotateY((1-r)*1.2);
         });
       };
       const dustCanvas=document.createElement('canvas'); dustCanvas.width=dustCanvas.height=128;
       const dc=dustCanvas.getContext('2d'); const gradient=dc.createRadialGradient(64,64,0,64,64,64);
-      gradient.addColorStop(0,'rgba(160,139,112,.35)'); gradient.addColorStop(.45,'rgba(160,139,112,.18)'); gradient.addColorStop(1,'rgba(160,139,112,0)');
+      gradient.addColorStop(0,'rgba(137,125,109,.65)'); gradient.addColorStop(.45,'rgba(148,137,120,.32)'); gradient.addColorStop(1,'rgba(160,139,112,0)');
       dc.fillStyle=gradient; dc.fillRect(0,0,128,128);
       const dustMap=new T.CanvasTexture(dustCanvas); textures.push(dustMap);
-      const dust=Array.from({length:32},(_,i)=>{
+      const dust=Array.from({length:56},(_,i)=>{
         const material=new T.SpriteMaterial({map:dustMap,transparent:true,opacity:0,depthWrite:false});
         const sprite=new T.Sprite(material); scene.add(sprite);
-        return {sprite, angle:i/32*Math.PI*2, speed:.8+Math.random()*1.4, size:.65+Math.random()*.7};
+        return {sprite, angle:i/56*Math.PI*2, speed:.8+Math.random()*1.4, size:.7+Math.random()*1.1};
       });
       const motion=matchMedia('(prefers-reduced-motion: reduce)');
       let elapsed=0;
@@ -193,9 +193,9 @@ export default function BoxDrop() {
         dust.forEach(d=>{
           const t=Math.max(0,impact);
           const travel=1.15+d.speed*(1-Math.exp(-t*1.5));
-          d.sprite.position.set(Math.cos(d.angle)*travel,.07+Math.sin(Math.min(t/2,1)*Math.PI)*.35,Math.sin(d.angle)*travel*.75);
+          d.sprite.position.set(Math.cos(d.angle)*travel,.07+Math.sin(Math.min(t/3,1)*Math.PI)*.6,Math.sin(d.angle)*travel*.75);
           d.sprite.scale.setScalar(d.size*(.3+t*.8));
-          d.sprite.material.opacity=impact<0||motion.matches?0:Math.min(t*7,1)*Math.exp(-t*1.5);
+          d.sprite.material.opacity=impact<0||motion.matches?0:Math.min(t*7,1)*Math.exp(-t*.9);
         });
         updateContents();render();
       };
@@ -212,7 +212,7 @@ export default function BoxDrop() {
   return <section ref={section} className="box-drop-section" aria-label="Unpack my skills and tools">
     <div className="box-drop-sticky">
       <div ref={host} className="box-drop-stage" aria-hidden="true"><div className="box-drop-fallback">Kaushal.</div></div>
-      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scrub" splitBy="word" fontSize={13} fontWeight={400} color="#003ffd" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
+      <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scrub" splitBy="word" fontSize={13} fontWeight={400} color="#606b72" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
       <div className="unpack-column unpack-skills"><SkillsReveal items={skillBranches} /></div>
       <div className="unpack-column unpack-tools"><SkillsReveal items={toolBranches} headingText="02 / TOOLS" stage="tools" /></div>
     </div>

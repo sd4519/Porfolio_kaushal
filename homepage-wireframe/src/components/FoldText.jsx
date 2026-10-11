@@ -78,7 +78,7 @@ const FoldText = ({
 
     if (parts) {
       return parts.map((part, index) => renderSegment(
-        part.shine ? <ShinyText text={part.text} color="#003ffd" shineColor="#606b72" speed={2.5} delay={1.5} pauseOnHover /> : part.text,
+        part.shine ? <ShinyText text={part.text} color="#606b72" shineColor="#003ffd" speed={2.5} delay={1.5} pauseOnHover /> : part.text,
         `part-${index}`, 'word'
       ));
     }

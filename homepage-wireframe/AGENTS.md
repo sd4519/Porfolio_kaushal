@@ -78,3 +78,5 @@ Unpacking must follow scroll position, with no timed autoplay. Pausing scroll pa
 Skills click/typing sequence now autoplays once triggered by scrolling to the skills stage. Tool emergence remains scroll-controlled and gated on skills completion.
 
 After skills complete, tools autoplay with matching cursor/type/branch choreography. Preserve the 3D tiles beside tool names.
+
+Use straight smaller software icons, neutral initial branch labels, symmetric columns, clearer ground dust, blue Inside the box title and secondary-gray prompt with selective blue shine.

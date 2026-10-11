@@ -440,3 +440,5 @@ All unpacking motion is now directly scrubbed by scroll position: drop/dust, fla
 Latest choreography: reaching the skills stage via scroll triggers automatic cursor movement/click, typing, branch drawing and label reveal once. Software tools remain driven by subsequent scrolling and wait for the skills sequence to complete.
 
 Tools now automatically follow skills completion. Use the same cursor click, typed heading, branch drawing and staggered labels on both sides. Group tools into Creative software and Web tools, with 3D software tiles beside their branch labels.
+
+Refinements: tool icons are smaller and face the camera straight. Branch labels share the muted color, including initial selections. Desktop columns sit symmetrically around the box; narrow layouts retain equal side gutters. Increase ground-dust density and duration. Inside the box uses brand blue, with a secondary-gray prompt and blue shine on MY SKILLS and TOOLS.

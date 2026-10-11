@@ -55,3 +55,20 @@
 .unpack-tools .tool-object-anchor { width: 24px; height: 24px; }
 .unpack-tools .branched-menu__item { gap: 10px; }
 @media (max-width: 767px) { .unpack-tools .branched-menu__item { gap: 4px; } .unpack-tools .tool-object-anchor { width: 20px; height: 20px; } }
+.unpack-heading .eyebrow { color: var(--accent); }
+.unpack-heading > p:last-child { color: var(--muted); }
+.unpack-column { width: min(22vw, 300px); }
+.unpack-skills { left: calc(50% - min(22vw, 300px) - 280px); }
+.unpack-tools { left: calc(50% + 280px); right: auto; }
+.unpack-column .branched-menu__item[data-active] { color: var(--muted); font-weight: 400; }
+.unpack-tools .tool-object-anchor { width: 18px; height: 18px; }
+@media (max-width: 1100px) and (min-width: 768px) {
+  .unpack-skills { left: var(--page-gutter); }
+  .unpack-tools { left: auto; right: var(--page-gutter); }
+}
+@media (max-width: 767px) {
+  .unpack-column { width: 40%; }
+  .unpack-skills { left: var(--page-gutter); }
+  .unpack-tools { left: auto; right: var(--page-gutter); }
+  .unpack-tools .tool-object-anchor { width: 16px; height: 16px; }
+}
