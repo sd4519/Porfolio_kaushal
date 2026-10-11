@@ -430,3 +430,5 @@ Resume-based unpacking: after the parcel lands, further scroll opens four hinged
 Unpacking heading is centered at the top of the scene. The prompt uses React Bits Fold Text on first scroll entry, with brand-blue Shiny Text highlights limited to my skills and tools. Keep restrained sizing and static text for reduced motion.
 
 Unpacking prompt revision: remove What I bring. Keep centered Inside the box in muted gray and Scroll to unpack my skills & tools. in brand blue. Preserve fold reveal and shine on my skills/tools, now blue with muted highlights.
+
+Prompt now uses all caps. Skills use React Bits Branched Menu with two expandable categories, Brand & communication and Digital & experiences, preserving all eight resume services. Blue branch tracing highlights selections; neutral branch lines and readable muted text.

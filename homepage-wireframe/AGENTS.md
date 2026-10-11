@@ -68,3 +68,5 @@ Resume verified visually: tool icons are Photoshop, Illustrator, Premiere Pro, W
 Center the unpacking heading and prompt. Use Fold Text reveal on the prompt and blue shine only on my skills and tools.
 
 Remove What I bring heading. Inside the box is muted gray; unpacking prompt is brand blue, retaining fold and selective shine.
+
+Use all caps for the unpack prompt. Skills use expandable React Bits Branched Menu categories with brand-blue branch traces. Preserve the right-side 3D tools.

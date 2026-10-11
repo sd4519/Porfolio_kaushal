@@ -32,3 +32,13 @@
 @media (prefers-reduced-motion: reduce) { .box-drop-section { height: 100svh; --unpack: 1; } }
 .unpack-tools { transform: none; }
 .unpack-skills { transform: translate(calc((1 - var(--unpack)) * 25vw), calc((1 - var(--unpack)) * 180px)); }
+.portfolio-skill-branches { margin-top: 16px; pointer-events: auto; --bm-muted: #606b72; }
+.portfolio-skill-branches .branched-menu__head:focus-visible,
+.portfolio-skill-branches .branched-menu__item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 767px) {
+  .portfolio-skill-branches { --bm-font: 11px !important; padding-left: 6px; }
+  .portfolio-skill-branches .branched-menu__head { font-size: 11px; }
+  .portfolio-skill-branches .branched-menu__label { white-space: normal; }
+}
+
+.unpack-skills .portfolio-skill-branches { --bm-muted: #606b72; }
