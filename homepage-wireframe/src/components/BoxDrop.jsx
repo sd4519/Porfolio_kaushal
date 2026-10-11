@@ -159,7 +159,8 @@ export default function BoxDrop() {
       let elapsed=0;
       const render=()=>renderer.render(scene,camera);
       let toolAnimationStarted=false;
-      const onToolsEmerge=()=>{if(toolAnimationStarted)return;toolAnimationStarted=true;gsap.to(toolsReveal,{value:1,duration:motion.matches?0:1.5,ease:'power2.inOut',onUpdate:()=>{updateContents();render();}});};
+      let scrollProgress=0;
+      const onToolsEmerge=()=>{if(toolAnimationStarted||(!motion.matches&&scrollProgress<.3))return;toolAnimationStarted=true;gsap.to(toolsReveal,{value:1,duration:motion.matches?0:1.5,ease:'power2.inOut',onUpdate:()=>{updateContents();render();}});};
       section.current.addEventListener('tools-emerge',onToolsEmerge);
       const size=()=>{
         const origin=element.getBoundingClientRect();const {width,height}=origin;
@@ -177,6 +178,15 @@ export default function BoxDrop() {
       const draw=()=>{
         const rect=section.current.getBoundingClientRect();
         const progress=motion.matches?1:T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
+        if(progress<scrollProgress) section.current.dataset.packing='true';
+        else if(progress>=.3) delete section.current.dataset.packing;
+        section.current.style.setProperty('--pack',String(T.MathUtils.smoothstep(progress,.06,.3)));
+        scrollProgress=progress;
+        if (!motion.matches && progress<.3) {
+          gsap.killTweensOf(toolsReveal);
+          toolsReveal.value=Math.min(toolsReveal.value,T.MathUtils.smoothstep(progress,.16,.3));
+          toolAnimationStarted=false;
+        }
         elapsed=progress*14;
         opening=motion.matches?1:T.MathUtils.smoothstep(progress,.13,.3);
         if(motion.matches)toolsReveal.value=1;

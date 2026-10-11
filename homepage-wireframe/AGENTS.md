@@ -80,3 +80,5 @@ Skills click/typing sequence now autoplays once triggered by scrolling to the sk
 After skills complete, tools autoplay with matching cursor/type/branch choreography. Preserve the 3D tiles beside tool names.
 
 Use straight smaller software icons, neutral initial branch labels, symmetric columns, clearer ground dust, blue Inside the box title and secondary-gray prompt with selective blue shine.
+
+Mirror tools branches to face the center, with lines at right. On reverse scrolling, pack skills and tools back into the box and close flaps.

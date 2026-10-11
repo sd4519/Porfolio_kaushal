@@ -72,3 +72,9 @@
   .unpack-tools { left: auto; right: var(--page-gutter); }
   .unpack-tools .tool-object-anchor { width: 16px; height: 16px; }
 }
+.unpack-tools .portfolio-skill-branches { transform: scaleX(-1); width: 100%; }
+.unpack-tools .branched-menu__head { transform: scaleX(-1); text-align: right; }
+.unpack-tools .branched-menu__item { transform: scaleX(-1); flex-direction: row-reverse; padding: 0 var(--bm-indent) 0 0; text-align: right; }
+.unpack-tools .skills-typed-heading { text-align: right; }
+.box-drop-section[data-packing] .unpack-skills { transform: translate(calc((1 - var(--pack, 1)) * 26vw), calc((1 - var(--pack, 1)) * 35svh)); opacity: var(--pack, 1); }
+.box-drop-section[data-packing] .unpack-tools .skills-reveal { transform: translate(calc((1 - var(--pack, 1)) * -26vw), calc((1 - var(--pack, 1)) * 35svh)); opacity: var(--pack, 1); }

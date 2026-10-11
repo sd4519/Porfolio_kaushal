@@ -51,14 +51,29 @@ export default function SkillsReveal({ items, headingText = '01 / SKILLS', stage
     };
     play();
     const progress = event => {
-      if (!triggered && event.detail >= .3) {
+      if (!media.matches && event.detail < .3) {
+        const from = stage === 'tools' ? .18 : .06;
+        const to = stage === 'tools' ? .3 : .18;
+        const rewind = Math.max(0, Math.min(1, (event.detail - from) / (to - from)));
+        timeline?.pause().progress(Math.min(timeline.progress(), rewind));
+        triggered = false;
+        element.inert = true;
+        delete section.dataset[`${stage}Complete`];
+        if (event.detail <= from) {
+          triggered = false;
+          element.querySelector('.skills-typed-heading').textContent = '';
+          if (stage === 'tools') delete section.dataset.toolsEmerging;
+        }
+        return;
+      }
+      if (stage === 'skills' && !triggered && event.detail >= .3) {
         triggered = true;
         timeline?.play(0);
       }
     };
     const start = () => { if (!triggered) { triggered = true; timeline?.play(0); } };
-    if (stage === 'skills') section.addEventListener('unpack-progress', progress);
-    else { section.addEventListener('skills-complete', start); if (section.dataset.skillsComplete === 'true') start(); }
+    section.addEventListener('unpack-progress', progress);
+    if (stage === 'tools') { section.addEventListener('skills-complete', start); if (section.dataset.skillsComplete === 'true') start(); }
     const motion = () => { context?.revert();triggered = false;play(); };
     media.addEventListener('change', motion);
     return () => { section.removeEventListener('unpack-progress', progress);section.removeEventListener('skills-complete', start);media.removeEventListener('change',motion);context?.revert(); };
