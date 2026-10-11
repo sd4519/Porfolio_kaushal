@@ -56,3 +56,5 @@ Latest scope overrides homepage-only: restore Work, Background, Approach, Contac
 Mobile/tablet navigation below 1024px uses the Sterling Gate kinetic layered menu adapted to brand blue and existing links. Desktop Gooey Nav stays unchanged. No decorative multicolor blobs; respect reduced motion and keyboard navigation. UI components live in src/components/ui; Tailwind utilities omit Preflight to preserve current layouts.
 
 Kinetic menu must animate on close as well as open: reverse-stagger links and slide layers right before hiding the overlay.
+
+Mobile/tablet hero below 1024px uses hero-portfolio-mobile.png, supplied as Portfolio Sketcher in Blue and Graphite.png. Desktop keeps hero-portfolio.png. Preserve centered contain sizing and static artwork.

@@ -418,3 +418,5 @@ Latest revision: restore all homepage sections and footer, and navigation destin
 Responsive navigation update: below 1024px show a blue Menu/Close toggle and layered sliding neutral panel, with brand-blue first backdrop and selected link. Use existing typefaces, numbered links and fine dividers. Desktop retains Gooey Nav. No decorative hover shapes.
 
 Kinetic menu closing: links exit in reverse stagger, followed by the layered panel sliding right and the scrim fading. Keep the overlay rendered until the exit completes; reduced motion closes immediately.
+
+Responsive hero image: use the user-supplied portrait hero-portfolio-mobile.png below 1024px (mobile and tablet); retain hero-portfolio.png for desktop. Use picture/source selection and centered contain sizing so the entire illustration remains visible.

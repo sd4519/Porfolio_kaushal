@@ -27,7 +27,10 @@ export function App() {
       </header>
       <main id="main">
         <section className="hero" aria-labelledby="hero-title">
-          <img className="hero-image" src="/images/hero-portfolio.png" alt="A seated illustrator sketching in a notebook in front of large blue Portfolio lettering." width="1672" height="941" fetchPriority="high" />
+          <picture className="hero-picture">
+            <source media="(max-width: 1023px)" srcSet="/images/hero-portfolio-mobile.png" />
+            <img className="hero-image" src="/images/hero-portfolio.png" alt="A seated illustrator sketching in a notebook in front of large blue Portfolio lettering." width="1672" height="941" fetchPriority="high" />
+          </picture>
           <h1 id="hero-title" className="hero-corner-heading"><span className="hero-heading-line"><ShinyText text="Precise" color="#171b1d" shineColor="#003ffd" speed={2.5} delay={1.5} shineWidth={35} pauseOnHover /> thinking.</span><span className="hero-heading-line">Purposeful <ShinyText text="execution" color="#171b1d" shineColor="#003ffd" speed={2.5} delay={1.5} shineWidth={35} pauseOnHover />.</span></h1>
         </section>
         <section className="section" id="work" aria-labelledby="work-title">
