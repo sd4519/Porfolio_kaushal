@@ -432,3 +432,5 @@ Unpacking heading is centered at the top of the scene. The prompt uses React Bit
 Unpacking prompt revision: remove What I bring. Keep centered Inside the box in muted gray and Scroll to unpack my skills & tools. in brand blue. Preserve fold reveal and shine on my skills/tools, now blue with muted highlights.
 
 Prompt now uses all caps. Skills use React Bits Branched Menu with two expandable categories, Brand & communication and Digital & experiences, preserving all eight resume services. Blue branch tracing highlights selections; neutral branch lines and readable muted text.
+
+Unpacking choreography: reveal skills first. A decorative brand-blue cursor emerges from the box, moves to the skills label and clicks; 01 / SKILLS types in, branch lines draw, then category and skill labels appear in sequence. After completion, software objects emerge independently. Keep controls inert during their reveal; reduced motion shows the completed state.

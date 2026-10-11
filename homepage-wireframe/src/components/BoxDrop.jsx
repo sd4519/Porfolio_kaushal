@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import './BoxDrop.css';
 import { portfolioSkills, portfolioTools } from './portfolioContent.js';
 import FoldText from './FoldText.jsx';
-import BranchedMenu from './BranchedMenu.jsx';
+import SkillsReveal from './SkillsReveal.jsx';
+import gsap from 'gsap';
 
 const skillBranches = [
   { label: 'Brand & communication', children: [0,1,4,5].map(index => ({ value: portfolioSkills[index], label: portfolioSkills[index] })) },
@@ -34,7 +35,7 @@ export default function BoxDrop() {
       if (disposed) return;
       let renderer;
       try { renderer = new T.WebGLRenderer({ antialias: true, alpha: true }); }
-      catch { element.dataset.fallback = 'true'; return; }
+      catch { element.dataset.fallback = 'true'; section.current.dispatchEvent(new Event('skills-unpack')); return; }
       renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = T.PCFSoftShadowMap;
@@ -125,11 +126,18 @@ export default function BoxDrop() {
         return {mesh,target:new T.Vector3()};
       });
       let opening=0;
+      let skillsTriggered=false;
+      const toolsReveal={value:0};
       const updateContents=()=>{
         flaps.forEach(({hinge,side,axis})=>hinge.rotation[axis]=(axis==='x'?-side:side)*opening*2.35);
         section.current.style.setProperty('--unpack',String(T.MathUtils.smoothstep(opening,.2,.95)));
+        section.current.style.setProperty('--tools-reveal',String(toolsReveal.value));
+        if(opening>.2 && !skillsTriggered) {
+          skillsTriggered=true;
+          section.current.dispatchEvent(new Event('skills-unpack'));
+        }
         toolObjects.forEach(({mesh,target},i)=>{
-          const r=T.MathUtils.smoothstep(opening,.2+i*.025,.75+i*.025);
+          const r=T.MathUtils.smoothstep(toolsReveal.value,i*.025,.75+i*.025);
           mesh.visible=r>0;
           mesh.position.copy(new T.Vector3(0,1.5,0).lerp(target,r));
           mesh.position.y+=Math.sin(r*Math.PI)*.7;
@@ -150,6 +158,9 @@ export default function BoxDrop() {
       const motion=matchMedia('(prefers-reduced-motion: reduce)');
       let frame=0, elapsed=0, last=0, visible=true;
       const render=()=>renderer.render(scene,camera);
+      const onSkillsRevealed=()=>{ gsap.to(toolsReveal,{value:1,duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:1.4,ease:'power2.inOut',onUpdate:()=>{updateContents();render();}}); };
+      section.current.addEventListener('skills-revealed',onSkillsRevealed);
+      if(motion.matches)toolsReveal.value=1;
       const size=()=>{
         const origin=element.getBoundingClientRect();const {width,height}=origin;
         renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();camera.updateMatrixWorld();
@@ -194,7 +205,7 @@ export default function BoxDrop() {
       const onVisibility=()=>{last=0;if(document.hidden){cancelAnimationFrame(frame);frame=0;}else wake();};
       motion.addEventListener('change',onMotion);document.addEventListener('visibilitychange',onVisibility);
       size();onScroll();if(motion.matches){elapsed=4.5;opening=1;settle();}else wake();
-      cleanup=()=>{window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);cancelAnimationFrame(frame);resize.disconnect();visibility.disconnect();motion.removeEventListener('change',onMotion);document.removeEventListener('visibilitychange',onVisibility);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
+      cleanup=()=>{section.current?.removeEventListener('skills-revealed',onSkillsRevealed);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);cancelAnimationFrame(frame);resize.disconnect();visibility.disconnect();motion.removeEventListener('change',onMotion);document.removeEventListener('visibilitychange',onVisibility);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
     },{threshold:.25});
     observer.observe(element);
     return ()=>{disposed=true;observer.disconnect();cleanup();};
@@ -203,7 +214,7 @@ export default function BoxDrop() {
     <div className="box-drop-sticky">
       <div ref={host} className="box-drop-stage" aria-hidden="true"><div className="box-drop-fallback">Kaushal.</div></div>
       <div className="unpack-heading"><p className="eyebrow">Inside the box</p><p><FoldText text="SCROLL TO UNPACK MY SKILLS & TOOLS." parts={unpackPrompt} trigger="scroll" splitBy="word" fontSize={13} fontWeight={400} color="#003ffd" duration={0.65} stagger={0.08} creaseShading={0.25} /></p></div>
-      <div className="unpack-column unpack-skills"><p className="eyebrow">01 / Skills</p><BranchedMenu items={skillBranches} defaultOpen={[0,1]} color="#171b1d" accentColor="#003ffd" lineColor="#ccd0ce" width={360} rowHeight={32} fontSize={14} indent={28} trunk={6} radius={8} className="portfolio-skill-branches" /></div>
+      <div className="unpack-column unpack-skills"><SkillsReveal items={skillBranches} /></div>
       <div className="unpack-column unpack-tools"><p className="eyebrow">02 / Software &amp; tools</p><ul>{portfolioTools.map(tool=><li key={tool.name}><span className="tool-object-anchor" aria-hidden="true" /><span>{tool.name}</span></li>)}</ul></div>
     </div>
   </section>;

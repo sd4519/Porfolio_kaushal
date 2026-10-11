@@ -42,3 +42,11 @@
 }
 
 .unpack-skills .portfolio-skill-branches { --bm-muted: #606b72; }
+.unpack-skills { opacity: 1; transform: none; }
+.skills-reveal { position: relative; }
+.skills-reveal:not([data-played]) { visibility: hidden; }
+.skills-typed-heading { min-height: 17px; }
+.skills-reveal-cursor { position: absolute; top: 0; left: 0; width: 30px; height: 38px; z-index: 2; pointer-events: none; opacity: 0; filter: drop-shadow(1px 3px 3px rgb(0 0 0 / .15)); }
+.portfolio-skill-branches::before { transform: scaleY(var(--skills-trunk, 1)); transform-origin: top; }
+.unpack-tools { opacity: var(--tools-reveal, 0); }
+.box-drop-section:has([data-fallback]) { --tools-reveal: 1; }
