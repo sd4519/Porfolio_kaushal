@@ -1,0 +1,10 @@
+node_modules
+homepage-wireframe/node_modules
+homepage-wireframe/dist
+homepage-wireframe/.local-assets
+reference-analysis
+qa-*.png
+homepage-wireframe/qa-*.png
+kinetic-mobile.png
+*-registry.json
+.env*
