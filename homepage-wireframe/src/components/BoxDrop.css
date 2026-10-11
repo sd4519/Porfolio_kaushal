@@ -1,0 +1,7 @@
+.box-drop-section { position: relative; height: min(820px, 100svh); min-height: 560px; border-top: 1px solid var(--line); background: #f2f1ed; overflow: hidden; }
+.box-drop-stage { width: 100%; height: 100%; }
+.box-drop-stage canvas { display: block; width: 100%; height: 100%; }
+.box-drop-fallback { display: none; }
+.box-drop-stage[data-fallback] { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 80px; }
+.box-drop-stage[data-fallback] .box-drop-fallback { display: grid; place-items: center; width: 230px; height: 175px; background: #b59368; border: 1px solid #8c714f; color: var(--accent); font: 600 28px "Space Grotesk", sans-serif; box-shadow: 12px 18px 25px rgb(30 24 15 / .15); }
+@media (max-width: 767px) { .box-drop-section { height: 80svh; min-height: 480px; } }

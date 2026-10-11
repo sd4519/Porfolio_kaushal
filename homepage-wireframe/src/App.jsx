@@ -1,6 +1,7 @@
 import { ScrollProgress } from './components/ScrollProgress.jsx';
 import GooeyNav from './components/GooeyNav.jsx';
 import ShinyText from './components/ShinyText.jsx';
+import BoxDrop from './components/BoxDrop.jsx';
 import { Component as KineticNavigation } from './components/ui/sterling-gate-kinetic-navigation';
 
 const navigationItems = [
@@ -33,6 +34,7 @@ export function App() {
           </picture>
           <h1 id="hero-title" className="hero-corner-heading"><span className="hero-heading-line"><ShinyText text="Precise" color="#171b1d" shineColor="#003ffd" speed={2.5} delay={1.5} shineWidth={35} pauseOnHover /> thinking.</span><span className="hero-heading-line">Purposeful <ShinyText text="execution" color="#171b1d" shineColor="#003ffd" speed={2.5} delay={1.5} shineWidth={35} pauseOnHover />.</span></h1>
         </section>
+        <BoxDrop />
         <section className="section" id="work" aria-labelledby="work-title">
           <div className="container">
             <div className="section-heading"><div><p className="eyebrow muted">01 / The work</p><h2 id="work-title">Selected work</h2></div><p className="section-intro">Three considered project stories. Each will explain the context, my contribution, and the outcome.</p></div>

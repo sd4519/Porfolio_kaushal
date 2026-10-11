@@ -58,3 +58,5 @@ Mobile/tablet navigation below 1024px uses the Sterling Gate kinetic layered men
 Kinetic menu must animate on close as well as open: reverse-stagger links and slide layers right before hiding the overlay.
 
 Mobile/tablet hero below 1024px uses hero-portfolio-mobile.png, supplied as Portfolio Sketcher in Blue and Graphite.png. Desktop keeps hero-portfolio.png. Preserve centered contain sizing and static artwork.
+
+User-approved 3D exception: a realistic cardboard box drop and impact dust directly below hero. Play once per mount; preserve existing portfolio sections. Respect reduced motion, lazy load Three.js, dispose scene resources, pause offscreen and stop after settling.
