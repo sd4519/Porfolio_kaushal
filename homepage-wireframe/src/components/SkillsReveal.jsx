@@ -82,6 +82,6 @@ export default function SkillsReveal({ items, headingText = '01 / SKILLS', stage
   return <div ref={root} className={`skills-reveal ${stage}-reveal`}>
     <p className="eyebrow skills-typed-heading">{headingText}</p>
     <svg className="skills-reveal-cursor" viewBox="0 0 32 40" aria-hidden="true"><path d="M3 2 3 30 11 23 17 36 23 33 17 21 28 21Z" fill="#003ffd" stroke="white" strokeWidth="2" strokeLinejoin="round" /></svg>
-    <BranchedMenu items={items} defaultOpen={[0,1]} color="#171b1d" accentColor="#003ffd" lineColor="#ccd0ce" width={360} rowHeight={32} fontSize={14} indent={28} trunk={6} radius={8} className="portfolio-skill-branches" />
+    <BranchedMenu items={items} defaultOpen={[0,1]} color="#171b1d" accentColor="#003ffd" lineColor="#ccd0ce" width={360} rowHeight={stage === 'tools' ? 38 : 32} fontSize={14} indent={28} trunk={6} radius={8} className="portfolio-skill-branches" />
   </div>;
 }

@@ -456,3 +456,25 @@ Section exit: once tools are fully revealed, forward scroll near the end trigger
 Delivery truck is now a responsive 2D SVG in brand blue at the bottom of the section, with rotating wheels and a muted architectural skyline/road backdrop. Preserve the 3D parcel, packing/loading choreography and automatic advance. Keep all changes local.
 
 Truck delivery removed at user request. Restore the original box drop/unpacking section with skills and tools, reverse-scroll packing, and normal scrolling to the next section. No truck, road backdrop, scroll lock or automatic section advance. Keep local only.
+
+Latest hero replacement (13 October 2026): white (#FFFFFF) full-viewport canvas, real Portfolio heading in Space Grotesk 500 and brand blue #003FFD, user-supplied sitting-person GLB layered in front of the heading. Replace image artwork and corner headline. Preserve navigation and subsequent sections. Static model, responsive framing, local implementation only.
+
+Box drop update (13 October 2026): entering the box section automatically plays the one-time drop, bounce and dust without requiring additional scrolling. Unpacking remains scroll-controlled; reduced motion shows the resting box.
+
+Hero/tools refinement (13 October 2026): restore bottom-left two-line headline with selective blue shine. User authorizes gentle whole-model GLB sway (no skeletal clips supplied); respect reduced motion and visibility. Tool rows have centered labels/headings, generous icon gaps and accurately sized projected 3D icons.
+
+Services section (13 October 2026): immediately after the box, add eight static service cards based on the supplied split-card reference. Use approved graphite/steel surfaces, inverse text, restrained Portfolio blue accents, Space Grotesk headings and IBM Plex Sans body. Rounded card exception: 24px outer cards and 16px visual panels to match the user reference. Original typographic service studies represent capabilities, not completed client projects. Keep future card scroll effects unimplemented pending the user's reference. Tighten tools into centered name/icon pairs with an 8px desktop gap and 6px mobile gap.
+
+Approved service-card motion (13 October 2026): implement Filter-inspired pinned stacking, scroll-scrubbed tilt/scale/depth/fade and reverse scrolling. Preserve brand styling. Responsive exception: static content on narrow or short viewports to keep every service readable; reduced motion bypasses the effect. No scroll lock or automatic advance.
+
+Services heading refinement (13 October 2026): use the supplied centered editorial reference for the section introduction. Graphite #171B1D background, inverse Space Grotesk two-line display heading, small Portfolio-blue IBM Plex Sans label on a light surface for contrast, subtle vertical steel rules, generous responsive breathing room. Replace the previous left-aligned heading and right-hand supporting copy. Preserve service cards and scroll behavior.
+
+Services heading correction: use the existing light #F2F1ED canvas, graphite text and a plain blue eyebrow with no pill or dark background. Match Filter's centered heading width/type scale and compact 440px introduction rather than an oversized dark panel; retain subtle light grid rules.
+
+Services introduction proportions approved: desktop uses at least one viewport with label near 51% down, 48px label-to-heading gap and 24svh lower breathing room. Heading uses Space Grotesk 500, responsive 40–72px and centered 800px maximum width. Mobile reduces upper spacing and allows content growth. Light background retained.
+
+Service polish: selective blue shine on Brand and execution, 20px label gap (16px mobile), incoming cards clear a smooth 10px blur by 20% card visibility. Replace prior code-based service studies with original minimal generated studio illustrations in Portfolio blue, graphite and warm-white; illustrative concepts only.
+
+User portfolio imagery: replace seven generated service illustrations with selected artwork from portfolio_kaushal.pdf and Personal Portfolio.pdf. Preserve the artwork's actual colors and aspect ratio; identify projects with captions. UI/UX uses Feltrom's supplied website layouts. No AI-development project was found; retain a clearly labeled AI concept illustration. Record PDF/page/crop provenance in portfolio-sources.json. Do not expose the full PDFs or their contact pages.
+
+Approved Discover showcase: replace placeholder Selected Work with verified portfolio project names and previews from the supplied PDFs. Spacious desktop pinned section, Discover label at left, diagonals framing active center row, vertically scrolling project names and right-side previews with edge blur/fade, scroll-reversible. Use light canvas, blue active emphasis and existing fonts. Mobile/reduced motion show readable static project rows. Service images fill their entire right panel, captions removed; retain left service copy.

@@ -96,3 +96,43 @@ Inside the box exit packs contents, closes parcel, loads a 3D truck, drives left
 Delivery truck is now a responsive 2D SVG in brand blue at the bottom of the section, with rotating wheels and a muted architectural skyline/road backdrop. Preserve the 3D parcel, packing/loading choreography and automatic advance. Keep all changes local.
 
 Truck delivery removed at user request. Restore the original box drop/unpacking section with skills and tools, reverse-scroll packing, and normal scrolling to the next section. No truck, road backdrop, scroll lock or automatic section advance. Keep local only.
+
+Latest hero replacement: remove the old image hero and corner headline. Use a pure white full-viewport section with real blue Portfolio typography in Space Grotesk, layered behind the user-supplied sitting-person GLB. Keep model static, frame responsively without clipping, dispose WebGL resources, retain navigation and lower sections. Keep work local.
+
+Latest box behavior: automatically play the box drop, bounce and impact dust once when the section enters view, independently of further scrolling. Pause the drop while offscreen or the tab is hidden; reduced motion shows a resting box. Preserve scroll-controlled unpacking and reverse-scroll packing.
+
+Latest user refinement: restore the bottom-left Precise thinking. / Purposeful execution. headline and selective blue shine. Animate the supplied unrigged GLB with subtle whole-model sway, pause when offscreen or hidden, and disable for reduced motion. Center tool headings and labels, increase label/icon gaps, and project 3D icons to match their reserved DOM dimensions.
+
+Latest approved services pass: compact centered tool name/icon pairs; eight static split-layout service cards after the box, before Selected Work. Follow supplied reference using existing brand palette/fonts, 24px card radius and original illustrative typography/layout studies. Write service copy from the eight verified skills without invented client claims. Await user scroll reference before adding card effects. Keep local.
+
+User approved Filter service-card scroll reference: on spacious desktop viewports, cards pin and recede with scroll-driven backward tilt, upward/depth translation, slight scaling and fading while the next card rises over them. Reverse scroll restores the cards. Last card exits with normal scrolling. Use static cards on narrow/short viewports where content cannot fit, and for reduced motion. Preserve content and brand design; local only.
+
+Latest services heading: centered two-line editorial heading with small blue label, spacious graphite introduction and restrained vertical grid rules based on the supplied image. Use existing Space Grotesk / IBM Plex Sans and approved brand palette; preserve the service-card stack. Keep local.
+
+Services heading correction: user rejects black/dark background. Use light brand canvas, graphite centered heading, plain blue eyebrow without badge, and reference-matched scale/spacing. Preserve service cards.
+
+Latest approved heading composition: match the screenshot with a full-viewport services introduction, substantial empty upper area, plain centered blue label near 51% of viewport height and a restrained two-line graphite heading below it. Maintain light canvas and subtle grid. Mobile uses shorter responsive spacing with natural height for wrapping; preserve card stack.
+
+User approved service polish: shine Brand/execution, closer eyebrow, incoming blur clears at 20% visibility, minimal AI-generated service imagery replaces current studies. Preserve reduced-motion static rendering and brand styling.
+
+Service artwork now comes from the user's two portfolio PDFs: NorthForge branding, Archive Cafe packaging, Feltrom website/interface, Yash Realty social, Noventix campaign, Gawarvala stationery. Preserve source artwork and readable contain sizing. AI remains explicitly conceptual because the supplied PDFs contain no matching project. Keep local.
+
+Latest user-approved pass: service artwork fills its right panel, with no caption/text on image side. Preserve left descriptions. Replace Selected Work placeholders with Filter-inspired scroll-scrubbed Discover showcase using actual PDF projects. Light background, blue active names, vertical thumbnails, diagonal framing; responsive static fallback and reduced motion. Local only.
+
+Latest Discover refinement: active PDF project image fills the background with a light readability veil and scroll-driven crossfade; active title sharp blue, next subdued, remaining titles blur into bottom. Desktop previews removed; retain static responsive/reduced-motion project images. Services introductory large heading uses IBM Plex Sans, Arial, sans-serif. Local only.
+
+Approved name introduction: full-screen blue KAUSHAL PRAJAPATI before Discover. Two clipped warm-light halves split vertically and fade with reversible scroll, revealing first project underneath before project scrolling starts. Responsive and reduced-motion use a static full-screen name. Local only.
+
+Latest split intro correction: single-line smaller RECENT PROJECTS replaces name, white text on brand-blue halves. Discover project titles rise from below as halves split and fade, reversible with scroll.
+
+Discover background stays completely hidden throughout split-screen opening. Only after halves fully clear does background fade in over 30vh of scroll; project advancement waits until this fade finishes. Reverse scroll restores sequence.
+
+Discover grid overlay removed. Recent Projects desktop entrance uses upstream MIT React Bits PixelSwap with bottom-to-top tiles and subtle randomized ordering, triggered on section entry. Retain split reveal after entrance and static reduced-motion/mobile presentation.
+
+Approved section navigation: preserve hero navigation; fixed blue Menu button appears past hero, links expand left from button on desktop and below it on mobile. Close on selection, outside click, Escape or returning to hero. Keyboard accessible and reduced-motion safe.
+
+After Discover add white full-viewport gallery invitation, centered See more of my work heading and upstream React Bits Slide Commit pill, without surrounding images. Slider opens native accessible dialog with actual PDF project artwork, Escape/Close dismisses. Retain upstream license; icons use inline SVG.
+
+Latest gallery invitation supersedes no-images preference: six actual portfolio artworks frame centered copy using Filter screenshot placements; masked upward headline reveal, button scale entrance and staggered artwork rise on section visibility. Preserve blue Slide Commit and gallery dialog. Responsive four-artwork mobile composition and reduced-motion fallback.
+
+User authorizes Git push and Vercel production deployment after responsive verification. New white closing contact section after gallery matches supplied screenshot: muted large headline, That's Kaushal, lower-left conversation copy, right-side invitation and brand-blue pill CTAs. Contact destinations must come from user, not be invented.

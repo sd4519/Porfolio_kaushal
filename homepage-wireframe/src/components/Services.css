@@ -1,0 +1,84 @@
+.services-section { padding: 64px 0; border-top: 1px solid var(--line); }
+.services-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 40px; }
+.services-heading h2 { font-size: clamp(36px, 4.45vw, 64px); line-height: 1.1; letter-spacing: -.025em; margin-top: 12px; }
+.services-heading > p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+.service-cards { display: grid; gap: 24px; }
+.service-card { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 24px; border-radius: 24px; background: #22292d; color: var(--inverse); }
+.service-copy { display: flex; flex-direction: column; justify-content: space-between; padding: 16px; gap: 64px; min-width: 0; }
+.service-card-top { display: flex; justify-content: space-between; gap: 24px; color: #b5bec1; font-size: 14px; line-height: 1.5; }
+.service-card-top > p { max-width: 190px; }
+.service-number { white-space: nowrap; font-variant-numeric: tabular-nums; font-size: 12px; }
+.service-card h3 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 20px; }
+.service-description { color: #b5bec1; font-size: 16px; line-height: 1.6; max-width: 440px; }
+.service-details { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; padding: 0; margin: 24px 0 0; font-size: 12px; line-height: 1.5; }
+.service-details li { display: flex; align-items: center; gap: 8px; }
+.service-details li::before { content: ''; width: 5px; height: 5px; background: var(--accent); }
+.service-tools { margin-top: 20px; padding-top: 16px; border-top: 1px solid #39464c; color: #b5bec1; font-size: 12px; line-height: 1.5; }
+.service-visual { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 1.1; min-width: 0; padding: 24px; border-radius: 16px; overflow: hidden; background: #e8e9e4; color: #171b1d; }
+.service-visual-meta { display: flex; justify-content: space-between; gap: 16px; font-size: 11px; line-height: 1.5; }
+.service-visual-meta > span:first-child { font-family: "Space Grotesk", Arial, sans-serif; font-weight: 600; }
+.service-visual-caption { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; line-height: 1.5; }
+@media (max-width: 1023px) { .service-card { gap: 16px; padding: 16px; }.service-copy { padding: 8px; gap: 32px; }.service-visual { aspect-ratio: auto; min-height: 440px; padding: 20px; }.service-card-top { gap: 12px; }.package-sleeve { padding: 16px; }.social-study { gap: 8px; }.social-tile { padding: 12px 8px; } }
+@media (max-width: 767px) { .services-section { padding: 40px 0; }.services-heading { display: block; margin-bottom: 24px; }.services-heading > p { margin-top: 20px; }.service-card { grid-template-columns: 1fr; gap: 24px; }.service-copy { padding: 8px 4px; gap: 32px; }.service-card h3 { font-size: 32px; }.service-visual { aspect-ratio: 1; min-height: 340px; padding: 20px; }.identity-word { font-size: 48px; }.identity-symbol { font-size: 96px; }.package-sleeve strong { font-size: 32px; }.browser-content strong { font-size: 36px; }.social-tile strong { font-size: 20px; }.marketing-study strong { font-size: 44px; }.print-sheet strong { font-size: 40px; }.interface-panel strong { font-size: 32px; }.ai-study strong { font-size: 36px; } }
+@media (max-width: 767px) {
+  .service-card { grid-template-columns: minmax(0, 1fr); }
+  .service-visual { aspect-ratio: auto; min-height: 400px; gap: 24px; }
+  .service-visual > div { flex-shrink: 0; }
+  .identity-word { font-size: clamp(32px, 11vw, 44px); }
+  .identity-symbol { position: static; font-size: 64px; margin-bottom: 20px; }
+  .social-tile { gap: 20px; padding: 12px 6px; }
+  .social-tile strong { font-size: clamp(14px, 4.6vw, 20px); }
+  .package-sleeve { padding: 16px 12px; }
+  .package-sleeve strong { font-size: clamp(24px, 8vw, 32px); }
+  .package-label { padding: 24px 8px; font-size: 48px; }
+  .flow-stages { gap: 4px; font-size: 9px; }
+  .flow-stages > span { padding: 6px; }
+  .marketing-study strong { font-size: clamp(32px, 11vw, 44px); }
+  .print-sheet { padding: 16px; }
+  .print-sheet strong { font-size: clamp(28px, 10vw, 40px); }
+  .interface-panel { padding: 16px; }
+  .interface-panel strong, .ai-study strong { font-size: clamp(26px, 9vw, 36px); }
+}
+/* Each slot pins in the shared stack; its inner card recedes as the next rises. */
+.service-cards[data-stack] { position: relative; display: block; }
+.service-cards[data-stack] .service-card-slot { position: sticky; top: 24px; padding-bottom: 24px; perspective: 1400px; perspective-origin: 50% 0; }
+.service-cards[data-stack] .service-card { min-height: var(--service-card-height); transform-origin: 50% 0; backface-visibility: hidden; }
+.service-cards[data-stack] .service-visual { aspect-ratio: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .service-cards[data-stack] { display: grid; }
+  .service-cards[data-stack] .service-card-slot { position: static; padding-bottom: 0; perspective: none; }
+  .service-cards[data-stack] .service-card { min-height: 0; transform: none !important; opacity: 1 !important; }
+}
+
+.service-cards[data-stack] { overflow: clip; }
+/* Centered editorial introduction, adapted to the portfolio's brand system. */
+.services-section { padding-top: 0; }
+.services-introduction { position: relative; isolation: isolate; background: #f2f1ed; color: #171b1d; margin-bottom: 32px; }
+.services-introduction::before { content: ''; position: absolute; inset: 0 var(--page-gutter); z-index: -1; pointer-events: none; border-inline: 1px solid #e8e9e4; background: repeating-linear-gradient(to right, transparent 0, transparent calc(16.6667% - 1px), #e8e9e4 calc(16.6667% - 1px), #e8e9e4 16.6667%); }
+.services-heading { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 20px; min-height: 100svh; margin-bottom: 0; padding-top: 51svh; padding-bottom: 24svh; text-align: center; }
+.services-heading > .eyebrow { display: inline-block; padding: 0; background: transparent; color: var(--accent); font-size: 12px; line-height: 1.4; }
+.services-heading h2 { font-family: "IBM Plex Sans", Arial, sans-serif; max-width: 800px; margin: 0; font-size: clamp(40px, 3.75vw, 72px); font-weight: 500; line-height: 1.2; letter-spacing: -.035em; }
+.services-heading h2 > span { display: block; }
+@media (max-width: 767px) {
+  .services-section { padding-top: 0; }
+  .services-introduction { margin-bottom: 24px; }
+  .services-introduction::before { background: repeating-linear-gradient(to right, transparent 0, transparent calc(33.3333% - 1px), #e8e9e4 calc(33.3333% - 1px), #e8e9e4 33.3333%); }
+  .services-heading { min-height: max(520px, 78svh); gap: 16px; padding-top: clamp(180px, 35svh, 320px); padding-bottom: 120px; }
+  .services-heading > .eyebrow { margin: 0; font-size: 11px; }
+  .services-heading h2 { font-size: clamp(32px, 7.8vw, 48px); line-height: 1.2; }
+}
+
+.service-cards[data-stack] .service-card { transition: filter 100ms linear; }
+@media (prefers-reduced-motion: reduce) { .service-card { filter: none !important; transition: none !important; } }
+.service-visual:has(.service-generated-image) { padding: 0; background: #f2f1ed; }
+.service-generated-image { display: block; width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.service-visual:has(.service-generated-image) .service-visual-meta { position: absolute; top: 24px; left: 24px; right: 24px; z-index: 1; }
+.service-visual:has(.service-generated-image) .service-visual-caption { position: absolute; bottom: 24px; left: 24px; right: 24px; z-index: 1; }
+@media (max-width: 767px) { .service-generated-image { object-fit: contain; } }
+.service-portfolio-visual { margin: 0; }
+.service-portfolio-visual:has(.service-generated-image) { background: #e8e9e4; }
+.service-portfolio-visual .service-generated-image { object-fit: contain; padding: 20px 20px 56px; }
+.service-portfolio-visual .service-visual-caption { color: #171b1d; font-size: 11px; letter-spacing: .04em; }
+@media (max-width: 767px) { .service-portfolio-visual .service-generated-image { padding: 16px 16px 56px; } }
+
+.service-portfolio-visual .service-generated-image { object-fit: cover; padding: 0; }

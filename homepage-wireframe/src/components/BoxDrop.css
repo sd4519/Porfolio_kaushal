@@ -78,3 +78,14 @@
 .unpack-tools .skills-typed-heading { text-align: right; }
 .box-drop-section[data-packing] .unpack-skills { transform: translate(calc((1 - var(--pack, 1)) * 26vw), calc((1 - var(--pack, 1)) * 35svh)); opacity: var(--pack, 1); }
 .box-drop-section[data-packing] .unpack-tools .skills-reveal { transform: translate(calc((1 - var(--pack, 1)) * -26vw), calc((1 - var(--pack, 1)) * 35svh)); opacity: var(--pack, 1); }
+/* Keep tool labels and their actual 3D icons centered within consistent rows. */
+.unpack-tools .skills-typed-heading,
+.unpack-tools .branched-menu__head { text-align: center; }
+.unpack-tools .branched-menu__item { height: 38px; gap: 8px; align-items: center; justify-content: center; }
+.unpack-tools .branched-menu__label { flex: 0 1 auto; min-width: 0; text-align: center; }
+.unpack-tools .branched-menu__icon { align-items: center; justify-content: center; }
+.unpack-tools .tool-object-anchor { width: 22px; height: 22px; flex: none; }
+@media (max-width: 767px) {
+  .unpack-tools .branched-menu__item { height: 38px; gap: 6px; padding-right: 20px; }
+  .unpack-tools .tool-object-anchor { width: 18px; height: 18px; }
+}

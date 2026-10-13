@@ -1,0 +1,78 @@
+[
+  {
+    "service": "identity",
+    "file": "identity-portfolio.jpg",
+    "source": "portfolio_kaushal.pdf",
+    "page": 5,
+    "crop": null,
+    "label": "NorthForge brand applications"
+  },
+  {
+    "service": "packaging",
+    "file": "packaging-portfolio.jpg",
+    "source": "portfolio_kaushal.pdf",
+    "page": 3,
+    "crop": [
+      545,
+      432,
+      847,
+      755
+    ],
+    "label": "Archive Cafe pastry packaging"
+  },
+  {
+    "service": "website",
+    "file": "website-portfolio.jpg",
+    "source": "portfolio_kaushal.pdf",
+    "page": 16,
+    "crop": [
+      65,
+      100,
+      1325,
+      850
+    ],
+    "label": "Feltrom website design"
+  },
+  {
+    "service": "social",
+    "file": "social-portfolio.jpg",
+    "source": "Personal Portfolio.pdf",
+    "page": 7,
+    "crop": null,
+    "label": "Yash Realty social creatives"
+  },
+  {
+    "service": "marketing",
+    "file": "marketing-portfolio.jpg",
+    "source": "portfolio_kaushal.pdf",
+    "page": 12,
+    "crop": [
+      70,
+      95,
+      1330,
+      655
+    ],
+    "label": "Noventix Global campaign creatives"
+  },
+  {
+    "service": "print",
+    "file": "print-portfolio.jpg",
+    "source": "Personal Portfolio.pdf",
+    "page": 10,
+    "crop": null,
+    "label": "The Gawarvala Foundation stationery"
+  },
+  {
+    "service": "interface",
+    "file": "interface-portfolio.jpg",
+    "source": "portfolio_kaushal.pdf",
+    "page": 7,
+    "crop": [
+      36,
+      380,
+      1027,
+      755
+    ],
+    "label": "Feltrom website interface layouts"
+  }
+]

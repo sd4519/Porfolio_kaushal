@@ -157,6 +157,9 @@ export default function BoxDrop() {
       });
       const motion=matchMedia('(prefers-reduced-motion: reduce)');
       let elapsed=0;
+      let dropFrame=0;
+      let lastDropTime;
+      const dropDuration=4.5;
       const render=()=>renderer.render(scene,camera);
       let toolAnimationStarted=false;
       let scrollProgress=0;
@@ -171,13 +174,15 @@ export default function BoxDrop() {
           const point=new T.Vector3((b.left+b.width/2-origin.left)/width*2-1,-(b.top+b.height/2-origin.top)/height*2+1,.5).unproject(camera);
           const ray=point.sub(camera.position).normalize();
           toolObjects[i].target.copy(camera.position).addScaledVector(ray,-camera.position.z/ray.z);
-          toolObjects[i].mesh.userData.baseScale=b.width/height*12;
+          const depth=toolObjects[i].target.clone().sub(camera.position).dot(camera.getWorldDirection(new T.Vector3()));
+          toolObjects[i].mesh.userData.baseScale=2*depth*Math.tan(T.MathUtils.degToRad(camera.fov/2))*(b.height/height)/.56;
         });onScroll();
       };
       let scrollFrame=0;
       const draw=()=>{
         const rect=section.current.getBoundingClientRect();
-        const progress=motion.matches?1:T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
+        const rawProgress=T.MathUtils.clamp(-rect.top/Math.max(1,rect.height-element.clientHeight),0,1);
+        const progress=motion.matches?1:Math.min(rawProgress,elapsed<1.05?.12:1);
         if(progress<scrollProgress) section.current.dataset.packing='true';
         else if(progress>=.3) delete section.current.dataset.packing;
         section.current.style.setProperty('--pack',String(T.MathUtils.smoothstep(progress,.06,.3)));
@@ -187,12 +192,11 @@ export default function BoxDrop() {
           toolsReveal.value=Math.min(toolsReveal.value,T.MathUtils.smoothstep(progress,.16,.3));
           toolAnimationStarted=false;
         }
-        elapsed=progress*14;
         opening=motion.matches?1:T.MathUtils.smoothstep(progress,.13,.3);
         if(motion.matches)toolsReveal.value=1;
         section.current.dispatchEvent(new CustomEvent('unpack-progress',{detail:progress}));
         if(section.current.dataset.toolsEmerging==='true')onToolsEmerge();
-        const fall=Math.min(elapsed/1.05,1);
+        const fall=motion.matches?1:Math.min(elapsed/1.05,1);
         box.position.y=.875*box.scale.y+7.5*(1-fall*fall);
         box.rotation.set(.09*(1-fall),-.28+.1*(1-fall),-.12*(1-fall));
         const impact=elapsed-1.05;
@@ -209,13 +213,29 @@ export default function BoxDrop() {
         });
         updateContents();render();
       };
+      const animateDrop=(time)=>{
+        dropFrame=0;
+        if(disposed)return;
+        const rect=element.getBoundingClientRect();
+        const visible=!document.hidden&&rect.bottom>0&&rect.top<window.innerHeight;
+        if(visible){
+          if(lastDropTime!==undefined)elapsed=Math.min(dropDuration,elapsed+Math.min((time-lastDropTime)/1000,.05));
+          lastDropTime=time;
+          draw();
+        }else lastDropTime=undefined;
+        if(!motion.matches&&elapsed<dropDuration)dropFrame=requestAnimationFrame(animateDrop);
+      };
+      const startDrop=()=>{
+        if(motion.matches){elapsed=dropDuration;draw();}
+        else if(!dropFrame&&elapsed<dropDuration){lastDropTime=undefined;dropFrame=requestAnimationFrame(animateDrop);}
+      };
       const onScroll=()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;draw();});};
       const resize=new ResizeObserver(size);resize.observe(element);
       window.addEventListener('scroll',onScroll,{passive:true});
-      const onMotionChange=onScroll;
+      const onMotionChange=()=>{cancelAnimationFrame(dropFrame);dropFrame=0;startDrop();onScroll();};
       motion.addEventListener('change',onMotionChange);
-      size();draw();
-      cleanup=()=>{section.current?.removeEventListener('tools-emerge',onToolsEmerge);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);resize.disconnect();motion.removeEventListener('change',onMotionChange);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
+      size();draw();startDrop();
+      cleanup=()=>{section.current?.removeEventListener('tools-emerge',onToolsEmerge);gsap.killTweensOf(toolsReveal);window.removeEventListener('scroll',onScroll);cancelAnimationFrame(scrollFrame);cancelAnimationFrame(dropFrame);resize.disconnect();motion.removeEventListener('change',onMotionChange);scene.traverse(object=>{object.geometry?.dispose();if(object.material){(Array.isArray(object.material)?object.material:[object.material]).forEach(m=>m.dispose());}});textures.forEach(t=>t.dispose());renderer.dispose();renderer.domElement.remove();};
     },{threshold:.25});
     observer.observe(element);
     return ()=>{disposed=true;observer.disconnect();cleanup();};
